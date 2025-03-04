@@ -6,18 +6,28 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 
-def request_gpt(input_file, prompt, output_filename):
+def request_gpt(input_file, prompt, output_filename, model_ai):
     # Connect to Openai API
     client = OpenAI(api_key=st.secrets["key"])
 
-    # Upload file to OpenAI and take ID
-    gpt_file = client.files.create(
-        file=input_file,
-        purpose='assistants').id
+    # print(input_file)
+    # print(type(input_file))
+    files_id = []
+    for file in input_file:
+        files_id.append(client.files.create(
+            file=file,
+            purpose='assistants').id)
+
+
+    # # Upload file to OpenAI and take ID
+    # gpt_file = client.files.create(
+    #     file=input_file,
+    #     purpose='assistants').id
+    
+    # print(gpt_file)
 
     assistant = client.beta.assistants.create(
-        # model="gpt-3.5-turbo-0125",
-        model="gpt-4o-mini-2024-07-18",
+        model=model_ai,
         instructions="You are an expert in credit risk modeling in banks",
         name="Summary Assistant",
         tools=[{"type": "file_search"}]
@@ -27,12 +37,23 @@ def request_gpt(input_file, prompt, output_filename):
     my_thread = client.beta.threads.create()
 
     # add message
+    # my_thread_message = client.beta.threads.messages.create(
+    # thread_id=my_thread.id,
+    # role = "user",
+    # content = prompt,
+    # attachments = [{ "file_id": files_id, "tools": [{"type": "file_search"}]}]
+    # )
+
+    attachments = [{"file_id": file_id, "tools": [{"type": "file_search"}]} for file_id in files_id]
+    print(attachments)
+
     my_thread_message = client.beta.threads.messages.create(
-    thread_id=my_thread.id,
-    role = "user",
-    content = prompt,
-    attachments = [{ "file_id": gpt_file, "tools": [{"type": "file_search"}]}]
+        thread_id=my_thread.id,
+        role="user",
+        content=prompt,
+        attachments=attachments
     )
+
 
     # Run
     my_run = client.beta.threads.runs.create(
