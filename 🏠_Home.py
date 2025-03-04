@@ -14,10 +14,6 @@ st.markdown(
     #### Giới thiệu: 
     -    Bản Beta Quant Retail AI được xây dựng với mục đích thử nghiệm.
     -    Các chức năng hiện có:
-            + Tóm tắt văn bản.
-            + Kiểm tra và giải thích code. 
-            + Viết kết luận Báo cáo giám sát tự động.
-            + Chatbot về Basel.
             + Tạo bài kiểm tra từ tài liệu.
             \n
     #### Hướng dẫn sử dụng:\n
