@@ -1,7 +1,6 @@
 import streamlit as st
 from io import BytesIO
 from base import request_gpt
-import PyPDF2
 
 st.set_page_config(
     page_title="Exam Generator", 
