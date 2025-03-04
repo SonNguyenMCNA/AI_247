@@ -76,55 +76,55 @@ def request_gpt(input_file, prompt, output_filename):
             st.write(f"Run status: {keep_retrieving_run.status}")
             break
 
-    # Delete file and agent
-    client.files.delete(gpt_file)
-    client.beta.assistants.delete(assistant)
-    client.beta.threads.delete(my_thread.id)
+    # # Delete file and agent
+    # client.files.delete(gpt_file)
+    # client.beta.assistants.delete(assistant)
+    # client.beta.threads.delete(my_thread.id)
 
-    # Define styles
-    styles = getSampleStyleSheet()
-    normal_style = ParagraphStyle(
-        name='Normal',
-        fontSize=12,
-        leading=14,
-        spaceAfter=6,
-        allowWidows=0,
-        allowOrphans=0
-    )
+    # # Define styles
+    # styles = getSampleStyleSheet()
+    # normal_style = ParagraphStyle(
+    #     name='Normal',
+    #     fontSize=12,
+    #     leading=14,
+    #     spaceAfter=6,
+    #     allowWidows=0,
+    #     allowOrphans=0
+    # )
 
-    # Function to replace \n with <br/> and bold text within **...**
-    def format_text(text):
-        # Replace **...** with <b>...</b>
-        text = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', text)
-        # Replace newlines with <br/> tags
-        text = text.replace('\n', '<br/>')
-        return text
+    # # Function to replace \n with <br/> and bold text within **...**
+    # def format_text(text):
+    #     # Replace **...** with <b>...</b>
+    #     text = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', text)
+    #     # Replace newlines with <br/> tags
+    #     text = text.replace('\n', '<br/>')
+    #     return text
 
-    # Create the document
-    buffer = BytesIO()
+    # # Create the document
+    # buffer = BytesIO()
 
-    doc = SimpleDocTemplate(buffer, pagesize=A4,
-                                rightMargin=72, leftMargin=72,
-                                topMargin=72, bottomMargin=18)
-    elements = []
+    # doc = SimpleDocTemplate(buffer, pagesize=A4,
+    #                             rightMargin=72, leftMargin=72,
+    #                             topMargin=72, bottomMargin=18)
+    # elements = []
 
-    formatted_output = format_text(output)
-    paragraph = Paragraph(formatted_output, normal_style)
-    elements.append(paragraph)
+    # formatted_output = format_text(output)
+    # paragraph = Paragraph(formatted_output, normal_style)
+    # elements.append(paragraph)
 
-    # Build the PDF
-    doc.build(elements)
+    # # Build the PDF
+    # doc.build(elements)
 
 
-    @st.experimental_fragment
-    def download_file():
-        st.download_button(
-                label="Download PDF",
-                data=buffer,
-                file_name=f"{output_filename}.pdf",
-                mime="application/pdf"
-            )
-    download_file()
+    # @st.fragment
+    # def download_file():
+    #     st.download_button(
+    #             label="Download PDF",
+    #             data=buffer,
+    #             file_name=f"{output_filename}.pdf",
+    #             mime="application/pdf"
+    #         )
+    # download_file()
 
     st.markdown(body=output)
 
