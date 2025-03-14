@@ -48,7 +48,6 @@ if language == "English":
         st.stop()
 
     prompt = f"From the input file, generate a test with {num_question} questions of type {question_type} with difficulty level {difficulty}."
-
     prompt = prompt + " At the end of the test, add a new section to provide the correct answer and detailed explanation for each question. Also refer to the page number in the file for each question and quote the relevant text."
 
     model_ai = st.selectbox(
@@ -96,11 +95,8 @@ elif language == "Tiếng Việt":
     if not difficulty:
         st.stop()
     
-
     prompt = f"Từ tệp đầu vào, tạo bài kiểm tra với {num_question} câu hỏi loại {question_type} với mức độ {difficulty}."
-
     prompt = prompt + " Cuối bài kiểm tra, thêm một phần mới để cung cấp câu trả lời đúng và giải thích chi tiết cho mỗi câu hỏi. Trích dẫn số trang trong tệp cho mỗi câu hỏi và trích dẫn văn bản, nội dung liên quan."
-    # st.markdown(prompt)
 
     model_ai = st.selectbox(
         "Chọn model:",
@@ -110,8 +106,6 @@ elif language == "Tiếng Việt":
 
     if not model_ai:
         st.stop()
-
-    # st.markdown(prompt)
 
     if st.button("Tạo bài kiểm tra"):
         print(prompt)

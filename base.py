@@ -10,25 +10,15 @@ def request_gpt(input_file, prompt, output_filename, model_ai):
     # Connect to Openai API
     client = OpenAI(api_key=st.secrets["key"])
 
-    # print(input_file)
-    # print(type(input_file))
     files_id = []
     for file in input_file:
         files_id.append(client.files.create(
             file=file,
             purpose='assistants').id)
 
-
-    # # Upload file to OpenAI and take ID
-    # gpt_file = client.files.create(
-    #     file=input_file,
-    #     purpose='assistants').id
-    
-    # print(gpt_file)
-
     assistant = client.beta.assistants.create(
         model=model_ai,
-        instructions="You are an expert in credit risk modeling in banks",
+        instructions="You are an employer looking for candidates in Credit Risk Modeling Department in a Bank.",
         name="Summary Assistant",
         tools=[{"type": "file_search"}]
     ).id
@@ -36,16 +26,7 @@ def request_gpt(input_file, prompt, output_filename, model_ai):
     # Create thread
     my_thread = client.beta.threads.create()
 
-    # add message
-    # my_thread_message = client.beta.threads.messages.create(
-    # thread_id=my_thread.id,
-    # role = "user",
-    # content = prompt,
-    # attachments = [{ "file_id": files_id, "tools": [{"type": "file_search"}]}]
-    # )
-
     attachments = [{"file_id": file_id, "tools": [{"type": "file_search"}]} for file_id in files_id]
-    print(attachments)
 
     my_thread_message = client.beta.threads.messages.create(
         thread_id=my_thread.id,
@@ -59,7 +40,7 @@ def request_gpt(input_file, prompt, output_filename, model_ai):
     my_run = client.beta.threads.runs.create(
         thread_id = my_thread.id,
         assistant_id = assistant,
-        instructions="Return the final report and do not report as a file."
+        instructions="Your job is to create exams for those candidates based on the information in the knowledge files, must be very precise and do not hallucinate."
     )
 
     while my_run.status in ["queued", "in_progress"]:
@@ -77,18 +58,12 @@ def request_gpt(input_file, prompt, output_filename, model_ai):
             )
 
             st.header('Output:', divider='green')
-            # output = []
             for txt in all_messages.data:
                 if txt.role == 'assistant':
-                    # output.append(txt.content[0].text.value)
-                    # st.markdown(body=txt.content[0].text.value)
                     output = txt.content[0].text.value
-
                     # Remove patterns
                     output = re.sub(r'【.*?†source】', '', output)
                     print(output)
-                    # print(txt.content[0].text.value)
-            
             break
         elif keep_retrieving_run.status == "queued" or keep_retrieving_run.status == "in_progress":
             pass
@@ -102,51 +77,5 @@ def request_gpt(input_file, prompt, output_filename, model_ai):
     # client.beta.assistants.delete(assistant)
     # client.beta.threads.delete(my_thread.id)
 
-    # # Define styles
-    # styles = getSampleStyleSheet()
-    # normal_style = ParagraphStyle(
-    #     name='Normal',
-    #     fontSize=12,
-    #     leading=14,
-    #     spaceAfter=6,
-    #     allowWidows=0,
-    #     allowOrphans=0
-    # )
-
-    # # Function to replace \n with <br/> and bold text within **...**
-    # def format_text(text):
-    #     # Replace **...** with <b>...</b>
-    #     text = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', text)
-    #     # Replace newlines with <br/> tags
-    #     text = text.replace('\n', '<br/>')
-    #     return text
-
-    # # Create the document
-    # buffer = BytesIO()
-
-    # doc = SimpleDocTemplate(buffer, pagesize=A4,
-    #                             rightMargin=72, leftMargin=72,
-    #                             topMargin=72, bottomMargin=18)
-    # elements = []
-
-    # formatted_output = format_text(output)
-    # paragraph = Paragraph(formatted_output, normal_style)
-    # elements.append(paragraph)
-
-    # # Build the PDF
-    # doc.build(elements)
-
-
-    # @st.fragment
-    # def download_file():
-    #     st.download_button(
-    #             label="Download PDF",
-    #             data=buffer,
-    #             file_name=f"{output_filename}.pdf",
-    #             mime="application/pdf"
-    #         )
-    # download_file()
-
     st.markdown(body=output)
-
     st.stop() 
