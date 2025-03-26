@@ -23,7 +23,7 @@ if source == "File":
     if not uploaded_file:
         st.stop()
     
-    prompt = 'Từ bài báo, hãy tóm tắt nội dung chính của bài báo. Tóm tắt ngắn gọn vào kết quả bắt buộc phải theo định dạng sau: Tiêu đề, Tác giả, Ngày xuất bản, URL, Giọng điệu, Tóm tắt. Lưu ý tất cả kết quả trả ra bắt buộc phải ở dạng bảng (kể cả phần Tóm tắt). Tác giả phải là người viết bài báo, chứ không phải là chủ của file được tải lên. Ngày xuất bản phải ở định dạng dd/mm/yyyy.'
+    prompt = 'Từ bài báo, hãy tổng hợp các biến độc lập được sử dụng để xây dựng mô hình. Kết quả bắt buộc phải theo định dạng sau: Tên biến, Mô tả, Công thức. Lưu ý tất cả kết quả trả ra bắt buộc phải ở dạng bảng.'
 
     if st.button("Trích xuất"):
         print(prompt)
@@ -35,7 +35,7 @@ elif source == "Link Web":
     if not link:
         st.stop()
 
-    prompt = f'Từ bài báo tại link sau: "{link}", hãy tóm tắt nội dung chính của bài báo. Tóm tắt ngắn gọn vào kết quả bắt buộc phải theo định dạng sau: Tiêu đề, Tác giả, Ngày xuất bản, URL, Giọng điệu, Tóm tắt. Lưu ý tất cả kết quả trả ra bắt buộc phải ở dạng bảng (kể cả phần Tóm tắt). Tác giả phải là người viết bài báo, chứ không phải là chủ của file được tải lên. Ngày xuất bản phải ở định dạng dd/mm/yyyy.'
+    prompt = f'Từ bài báo tại link sau: "{link}", hãy tổng hợp các biến độc lập được sử dụng để xây dựng mô hình. Kết quả bắt buộc phải theo định dạng sau: Tên biến, Mô tả, Công thức. Lưu ý tất cả kết quả trả ra bắt buộc phải ở dạng bảng.'
 
     if st.button("Trích xuất"):
         print(prompt)
