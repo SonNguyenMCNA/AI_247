@@ -7,7 +7,7 @@ st.set_page_config(
     page_icon="🤖",
 )
 
-st.write("# Article Extraction 📚")
+st.write("# Article Extraction 📝")
 
 source = st.selectbox(
     "Chọn loại tài liệu:",

@@ -15,11 +15,12 @@ st.markdown(
     -    Bản Beta Quant Retail AI được xây dựng với mục đích thử nghiệm.
     -    Các chức năng hiện có:
             + Tạo bài kiểm tra từ tài liệu.
+            + Trích xuất thông tin từ bài báo.
             \n
     #### Hướng dẫn sử dụng:\n
     - B1: Chọn chức năng muốn sử dụng
-    - B2: Upfile theo chức năng từ máy tính/điện thoại
-    - B3: Download file kết quả\n
+    - B2: Upload file hoặc điền thông tin theo chức năng từ máy tính/điện thoại
+    - B3: Ấn nút gửi yêu cầu và kết quả sẽ được in lên màn hình\n
     Powered by: OpenAI, Streamlit
 """
 )
