@@ -6,7 +6,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 
-def request_gpt(input_file, prompt, output_filename, model_ai):
+def request_gpt(input_file, prompt, model_ai):
     # Connect to Openai API
     client = OpenAI(api_key=st.secrets["key"])
 
@@ -18,7 +18,7 @@ def request_gpt(input_file, prompt, output_filename, model_ai):
 
     assistant = client.beta.assistants.create(
         model=model_ai,
-        instructions="You are an employer looking for candidates in Credit Risk Modeling Department in a Bank.",
+        instructions="You are an employer in Credit Risk Modeling Department in a Bank.",
         name="Summary Assistant",
         tools=[{"type": "file_search"}]
     ).id
@@ -40,7 +40,7 @@ def request_gpt(input_file, prompt, output_filename, model_ai):
     my_run = client.beta.threads.runs.create(
         thread_id = my_thread.id,
         assistant_id = assistant,
-        instructions="Your job is to create exams for those candidates based on the information in the knowledge files, must be very precise and do not hallucinate."
+        instructions="Your job is to Answer the user's question.",
     )
 
     while my_run.status in ["queued", "in_progress"]:
@@ -79,3 +79,16 @@ def request_gpt(input_file, prompt, output_filename, model_ai):
 
     st.markdown(body=output)
     st.stop() 
+
+
+def chat_completion(model, prompt):
+    client = OpenAI(api_key=st.secrets["key"])
+    completion = client.chat.completions.create(
+        model=model,
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+
+    st.markdown(body=completion.choices[0].message.content)
+    st.stop()

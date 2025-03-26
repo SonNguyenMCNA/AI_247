@@ -63,7 +63,7 @@ if language == "English":
 
     if st.button("Generate Exam"):
         print(prompt)
-        request_gpt(uploaded_file, prompt, "test", model_ai)
+        request_gpt(uploaded_file, prompt, model_ai)
         
 
 elif language == "Tiếng Việt":
@@ -109,4 +109,4 @@ elif language == "Tiếng Việt":
 
     if st.button("Tạo bài kiểm tra"):
         print(prompt)
-        request_gpt(uploaded_file, prompt, "test", model_ai)
+        request_gpt(uploaded_file, prompt, model_ai)
