@@ -7,11 +7,11 @@ st.set_page_config(
     page_icon="🤖",
 )
 
-st.write("# Article Extraction 📝")
+st.write("# Feature Extraction 📝")
 
 st.markdown(
     """
-### Hướng dẫn sử dụng công cụ trích xuất Features từ tài liệu:
+### Hướng dẫn sử dụng công cụ trích xuất Feature từ tài liệu:
 
 ##### Bước 1: Chọn loại dữ liệu đầu vào
 Người dùng lựa chọn hình thức đầu vào phù hợp với nhu cầu:
