@@ -9,6 +9,28 @@ st.set_page_config(
 
 st.write("# Exam Generator 👨‍🏫")
 
+st.markdown(
+    """
+### Hướng dẫn sử dụng công cụ tạo đề thi tự động:
+
+##### Bước 1: Chọn ngôn ngữ
+Người dùng lựa chọn ngôn ngữ phù hợp để tạo đề thi, đảm bảo hệ thống xử lý nội dung chính xác theo mong muốn.
+
+##### Bước 2: Tải lên tài liệu nguồn
+Nhấn vào nút “Browse files” để chọn và tải lên tệp tài liệu (PDF, DOCX). Hệ thống sẽ phân tích nội dung để tạo câu hỏi dựa trên thông tin trong tài liệu.
+
+##### Bước 3: Tùy chỉnh thông số đề thi
+Người dùng có thể điều chỉnh các cài đặt theo nhu cầu, bao gồm:\n
+- Số lượng câu hỏi cần tạo
+- Mức độ khó (dễ, trung bình, khó)
+- Loại câu hỏi (trắc nghiệm, điền vào chỗ trống, đúng/sai)
+- Các tùy chọn bổ sung như hiển thị đáp án và lời giải thích
+
+##### Bước 4: Tạo đề thi và xem kết quả
+Sau khi hoàn tất tùy chỉnh, nhấn nút “Tạo đề thi”. Hệ thống sẽ tự động xử lý và hiển thị đề thi hoàn chỉnh trên màn hình, bao gồm danh sách câu hỏi, đáp án và giải thích chi tiết (nếu có).
+"""
+)
+
 language = st.selectbox(
     "Choose language:",
     ("English", "Tiếng Việt"),
