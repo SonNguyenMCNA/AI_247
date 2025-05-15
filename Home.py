@@ -20,7 +20,7 @@ st.markdown(
     - B1: Chọn chức năng muốn sử dụng
     - B2: Upload file hoặc điền thông tin theo chức năng từ máy tính/điện thoại
     - B3: Ấn nút gửi yêu cầu và kết quả sẽ được in lên màn hình\n
-    Powered by: MCNA
+    Powered by: MCNA - 0916442368
 """
 )
 
