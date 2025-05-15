@@ -1,11 +1,11 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="AI 247",
+    page_title="AI MCNA",
     page_icon="🤖",
 )
 
-st.write("# AI 247 👋")
+st.write("# AI MCNA 👋")
 
 st.sidebar.success("Select a demo above.")
 
@@ -20,7 +20,7 @@ st.markdown(
     - B1: Chọn chức năng muốn sử dụng
     - B2: Upload file hoặc điền thông tin theo chức năng từ máy tính/điện thoại
     - B3: Ấn nút gửi yêu cầu và kết quả sẽ được in lên màn hình\n
-    Powered by: ...
+    Powered by: MCNA
 """
 )
 
